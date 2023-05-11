@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // {"id":1,"url":"https://www.tvmaze.com/shows/1/under-the-dome","name":"Under the Dome","type":"Scripted","language":"English",
 // "genres":["Drama","Science-Fiction","Thriller"],"status":"Ended","runtime":60,"averageRuntime":60,"premiered":"2013-06-24",
@@ -48,9 +48,9 @@ const Home = () => {
                 <div className='card'>
                   <img src={`${zerie.image.medium}`} className='card-img-top' alt={zerie.name} />
                   <div className='card-body'>
-                    {/* <Link to={`/pokemon/${zerie.url.split('/')[6]}`}>
+                    <Link to={`/pokemon/${zerie.url.split('/')[6]}`}>
                       <h5 className='card-title'>{zerie.name}</h5>
-                    </Link> */}
+                    </Link>
                   </div>
                 </div>
               </div>
