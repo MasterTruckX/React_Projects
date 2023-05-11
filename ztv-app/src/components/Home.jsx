@@ -48,7 +48,7 @@ const Home = () => {
                 <div className='card'>
                   <img src={`${zerie.image.medium}`} className='card-img-top' alt={zerie.name} />
                   <div className='card-body'>
-                    <Link to={`/pokemon/${zerie.url.split('/')[6]}`}>
+                    <Link to={`/zerie/${zerie.id}`}>
                       <h5 className='card-title'>{zerie.name}</h5>
                     </Link>
                   </div>

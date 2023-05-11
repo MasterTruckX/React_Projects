@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import parse from 'html-react-parser'
 
 const ZerieDetail = () => {
   const { id } = useParams()
@@ -29,7 +30,7 @@ const ZerieDetail = () => {
             </div>
             <div className='col-md-8'>
               <h2>Synopsis</h2>
-              <div>{zerie.summary}</div>
+              <div>{parse(zerie.summary)}</div>
             </div>
           </div>
         </div>
