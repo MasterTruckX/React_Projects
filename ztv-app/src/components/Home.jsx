@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'reat-router-dom'
+// import { Link } from 'react-router-dom'
 
 // {"id":1,"url":"https://www.tvmaze.com/shows/1/under-the-dome","name":"Under the Dome","type":"Scripted","language":"English",
 // "genres":["Drama","Science-Fiction","Thriller"],"status":"Ended","runtime":60,"averageRuntime":60,"premiered":"2013-06-24",
@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     fetch('https://api.tvmaze.com/shows?limit=15')
       .then(response => response.json())
-      .then(data => setZeries(data.results))
+      .then(data => setZeries(data))
       .catch(error => console.error(error))
   }, [])
 
@@ -28,9 +28,10 @@ const Home = () => {
   const filteredZeries = zeries.filter(zerie => {
     return zerie.name.toLowerCase().includes(searchTitle.toLowerCase())
   })
+  //   https://api.tvmaze.com/shows/${zerie.id}/images
   return (
     <div>
-      <h1>Z-Home</h1>
+      <h1>Zeries TV</h1>
       <form>
         <input
           type='text'
@@ -43,13 +44,13 @@ const Home = () => {
       <div className='row'>
         {
             filteredZeries.map(zerie => (
-              <div className='col-sm-4 mb-4' key={zerie.name}>
+              <div className='col-sm-4 mb-4' key={zerie.id}>
                 <div className='card'>
-                  <img src={`https://api.tvmaze.com/shows/${zerie.id}/images`} className='card-img-top' alt={zerie.name} />
+                  <img src={`${zerie.image.medium}`} className='card-img-top' alt={zerie.name} />
                   <div className='card-body'>
-                    <Link to={`/zerie/${zerie.url}`}>
+                    {/* <Link to={`/pokemon/${zerie.url.split('/')[6]}`}>
                       <h5 className='card-title'>{zerie.name}</h5>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>
