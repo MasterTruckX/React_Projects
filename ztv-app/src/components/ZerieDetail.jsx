@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
 import Cast from './Cast'
+import EpisodeDetail from './EpisodeDetail'
 
 const ZerieDetail = () => {
   const { id } = useParams()
@@ -44,7 +45,7 @@ const ZerieDetail = () => {
       </div>
       <div className='episodes'>
         <h3>Episodes</h3>
-        <table />
+        <EpisodeDetail />
       </div>
       <div className='cast'>
         <Cast id={id} />

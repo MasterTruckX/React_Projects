@@ -10,19 +10,41 @@ import { useState, useEffect } from 'react'
 
 const EpisodeDetail = ({ id }) => {
   const [espisode, setEpisode] = useState([])
-  const sendEpisode = () => {
-    fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
+  const sendSeason = () => {
+    fetch(`https://api.tvmaze.com/shows/${id}/seasons`)
       .then(response => response.json())
       .then(espisode => setEpisode(espisode))
       .catch(error => console.error(error))
   }
 
   useEffect(() => {
-    sendEpisode()
+    sendSeason()
   }, [])
 
+  // collapse Season button displaying Episode cards https://getbootstrap.com/docs/5.3/components/collapse/
+
   return (
-    <div>EpisodeDetail</div>
+    <div>
+      <p>
+        <button className='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target='.multi-collapse' aria-expanded='false' aria-controls='multiCollapseExample1 multiCollapseExample2'>Toggle both elements</button>
+      </p>
+      <div className='row'>
+        <div className='col'>
+          <div className='collapse multi-collapse' id='multiCollapseExample1'>
+            <div className='card card-body'>
+              Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+            </div>
+          </div>
+        </div>
+        <div className='col'>
+          <div className='collapse multi-collapse' id='multiCollapseExample2'>
+            <div className='card card-body'>
+              Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
