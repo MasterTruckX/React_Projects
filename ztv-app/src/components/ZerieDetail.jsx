@@ -45,7 +45,7 @@ const ZerieDetail = () => {
       </div>
       <div className='episodes'>
         <h3>Episodes</h3>
-        <EpisodeDetail />
+        <EpisodeDetail id={id} />
       </div>
       <div className='cast'>
         <Cast id={id} />

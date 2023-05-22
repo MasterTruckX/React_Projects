@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-
+import parse from 'html-react-parser'
 // [{"id":1,"url":"https://www.tvmaze.com/episodes/1/under-the-dome-1x01-pilot","name":"Pilot","season":1,"number":1,
 // "type":"regular","airdate":"2013-06-24","airtime":"22:00","airstamp":"2013-06-25T02:00:00+00:00","runtime":60,
 // "rating":{"average":6.8},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_landscape/1/4388.jpg",
@@ -9,11 +9,11 @@ import { useState, useEffect } from 'react'
 // "show":{"href":"https://api.tvmaze.com/shows/1"}}}
 
 const EpisodeDetail = ({ id }) => {
-  const [espisode, setEpisode] = useState([])
+  const [season, setSeason] = useState([])
   const sendSeason = () => {
     fetch(`https://api.tvmaze.com/shows/${id}/seasons`)
       .then(response => response.json())
-      .then(espisode => setEpisode(espisode))
+      .then(season => setSeason(season))
       .catch(error => console.error(error))
   }
 
@@ -26,11 +26,13 @@ const EpisodeDetail = ({ id }) => {
   return (
     <div>
       <p>
-        <button className='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target='.multi-collapse' aria-expanded='false' aria-controls='multiCollapseExample1 multiCollapseExample2'>Toggle both elements</button>
+        {season.map(cap => (
+          <button className='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target='.multi-collapse' aria-expanded='false' aria-controls='multiCollapseExample1 multiCollapseExample2' key={cap.id}>Season {`${cap.number}`}</button>
+        ))}
       </p>
       <div className='row'>
         <div className='col'>
-          <div className='collapse multi-collapse' id='multiCollapseExample1'>
+          <div className='collapse multi-collapse'>
             <div className='card card-body'>
               Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
             </div>
