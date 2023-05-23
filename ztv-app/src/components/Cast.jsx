@@ -33,7 +33,7 @@ const Cast = ({ id }) => {
         </thead>
         <tbody>
           {cast.map(person => (
-            <tr key={person.person.url}>
+            <tr key={person.person._links.self.href}>
               <td>{person.person.name}</td>
               <td>{person.character.name}</td>
             </tr>

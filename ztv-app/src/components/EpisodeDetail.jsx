@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
+import EpisodeCard from './EpisodeCard'
 // [{"id":1,"url":"https://www.tvmaze.com/episodes/1/under-the-dome-1x01-pilot","name":"Pilot","season":1,"number":1,
 // "type":"regular","airdate":"2013-06-24","airtime":"22:00","airstamp":"2013-06-25T02:00:00+00:00","runtime":60,
 // "rating":{"average":6.8},"image":{"medium":"https://static.tvmaze.com/uploads/images/medium_landscape/1/4388.jpg",
@@ -10,6 +11,7 @@ import parse from 'html-react-parser'
 
 const EpisodeDetail = ({ id }) => {
   const [season, setSeason] = useState([])
+  const [selected, setSelected] = useState(null)
   const sendSeason = () => {
     fetch(`https://api.tvmaze.com/shows/${id}/seasons`)
       .then(response => response.json())
@@ -23,28 +25,30 @@ const EpisodeDetail = ({ id }) => {
 
   // collapse Season button displaying Episode cards https://getbootstrap.com/docs/5.3/components/collapse/
 
+  const toggle = (i) => {
+    if (selected === i) {
+      return setSelected(null)
+    }
+
+    setSelected(i)
+  }
   return (
-    <div>
-      <p>
-        {season.map(cap => (
-          <button className='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target='.multi-collapse' aria-expanded='false' aria-controls='multiCollapseExample1 multiCollapseExample2' key={cap.id}>Season {`${cap.number}`}</button>
+    <div className='wrapper'>
+      <div className='accordion'>
+        {season.map((cap, i) => (
+          <div className='item' key={cap.id}>
+            <div className='title' onClick={() => toggle(i)}>
+              <h4>Season {`${cap.number}`}</h4>
+            </div>
+            <div className={selected === i ? 'content show' : 'content'}>
+              <EpisodeCard id={id} />
+            </div>
+            {/* <button className='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target={`Season ${i}`} aria-expanded='false' aria-controls='multiCollapseExample1 multiCollapseExample2'>Season {`${cap.number}`}</button>
+            <div id={`Season ${i}`}>
+              <EpisodeCard id={id} />
+            </div> */}
+          </div>
         ))}
-      </p>
-      <div className='row'>
-        <div className='col'>
-          <div className='collapse multi-collapse'>
-            <div className='card card-body'>
-              Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </div>
-          </div>
-        </div>
-        <div className='col'>
-          <div className='collapse multi-collapse' id='multiCollapseExample2'>
-            <div className='card card-body'>
-              Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
