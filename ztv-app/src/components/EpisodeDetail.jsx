@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import parse from 'html-react-parser'
 import EpisodeCard from './EpisodeCard'
 // [{"id":1,"url":"https://www.tvmaze.com/episodes/1/under-the-dome-1x01-pilot","name":"Pilot","season":1,"number":1,
 // "type":"regular","airdate":"2013-06-24","airtime":"22:00","airstamp":"2013-06-25T02:00:00+00:00","runtime":60,
@@ -41,12 +40,8 @@ const EpisodeDetail = ({ id }) => {
               <h4>Season {`${cap.number}`}</h4>
             </div>
             <div className={selected === i ? 'content show' : 'content'}>
-              <EpisodeCard id={id} />
+              <EpisodeCard id={id} season={cap.number} />
             </div>
-            {/* <button className='btn btn-primary' type='button' data-bs-toggle='collapse' data-bs-target={`Season ${i}`} aria-expanded='false' aria-controls='multiCollapseExample1 multiCollapseExample2'>Season {`${cap.number}`}</button>
-            <div id={`Season ${i}`}>
-              <EpisodeCard id={id} />
-            </div> */}
           </div>
         ))}
       </div>
