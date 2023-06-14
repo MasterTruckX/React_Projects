@@ -1,4 +1,4 @@
-$menu-color: #3d3d3d;
+$menu-color: #f788ad;
 
 @mixin header-link{
     color: $menu-color;
@@ -11,7 +11,7 @@ $menu-color: #3d3d3d;
 }
 
 .header {
-    background-color: #dadada;
+    background-color: #000000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,6 +19,7 @@ $menu-color: #3d3d3d;
 
     &__logo {
         @include header-link;
+        font-size: 3rem;
     }
 
     &__nav-list {
