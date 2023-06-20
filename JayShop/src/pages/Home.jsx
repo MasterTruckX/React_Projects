@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react'
 import { getAllItems } from '@/services/itemServices'
 import '@/styles/home.css'
+import Header from '../components'
 
 const Home = () => {
-  const [itemsData, setItemsData] = useState(null)
+  const [itemsData, setItemsData] = useState([])
   const [loading, setLoading] = useState(true)
+  const [searchProduct, setSearchProduct] = useState('') // Palabra a buscar
+  const handleSearch = (event) => {
+    setSearchProduct(event.target.value)
+  }
+  const filteredProducts = itemsData.filter(product => {
+    return product.product_name.toLowerCase().includes(searchProduct.toLowerCase())
+  })
 
   useEffect(() => {
     const fetchItemData = async () => {
@@ -23,14 +31,15 @@ const Home = () => {
 
   return (
     <>
-      <h1>Home</h1>
       <div className='Home'>
+        <h1>Home</h1>
+        <Header searchProduct={searchProduct} handleSearch={handleSearch} />
         <div className='d-flex flex-row flex-wrap justify-content-center'>
           {/* Si itemsData no esta vacio, recorro el arreglo con Map y creo un Card de Bootstrap para cada elemento */}
           {
         loading
           ? <h1>Cargando...</h1>
-          : itemsData.map((product) => (
+          : filteredProducts.map((product) => (
             <div className='card' style={{ width: '18rem' }} key={product.id}>
               <img className='card-img-top' style={{ maxHeight: '300px' }} src={product.image} alt={product.product_name} />
               <div className='card-body'>
