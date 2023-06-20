@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getAllItems } from '@/services/itemServices'
+import '@/styles/home.css'
 
 const Home = () => {
   const [itemsData, setItemsData] = useState(null)
@@ -23,9 +24,10 @@ const Home = () => {
   return (
     <>
       <h1>Home</h1>
-      <div className='d-flex flex-row flex-wrap justify-content-center'>
-        {/* Si itemsData no esta vacio, recorro el arreglo con Map y creo un Card de Bootstrap para cada elemento */}
-        {
+      <div className='Home'>
+        <div className='d-flex flex-row flex-wrap justify-content-center'>
+          {/* Si itemsData no esta vacio, recorro el arreglo con Map y creo un Card de Bootstrap para cada elemento */}
+          {
         loading
           ? <h1>Cargando...</h1>
           : itemsData.map((product) => (
@@ -40,6 +42,7 @@ const Home = () => {
             </div>
           ))
 }
+        </div>
       </div>
     </>
   )
