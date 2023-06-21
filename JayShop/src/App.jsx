@@ -3,6 +3,7 @@ import RoutesIndex from '@/routes/Index'
 import '@/App.css'
 import Header from './components/Header'
 import { AuthProvider } from '@/context/AuthContext'
+import LoginPopup from './components/Header/LoginPopup/LoginPopup'
 
 function App () {
   return (
@@ -10,6 +11,7 @@ function App () {
       <AuthProvider>
         <BrowserRouter>
           <Header />
+          <LoginPopup />
           <RoutesIndex />
         </BrowserRouter>
       </AuthProvider>
