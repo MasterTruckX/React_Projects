@@ -23,13 +23,13 @@ const ProductDetails = () => {
   return (
     <>
       <div className='product-details'>
-        <h1>ProductDetails</h1>
-        <p>{product.product_name}</p>
+        <h1 className='product-details__p--name'>{product.product_name}</h1>
+        <img className='card-img-top' style={{ maxHeight: '300px', maxWidth: '50%', display: 'block', marginLeft: 'auto', marginRight: 'auto', borderWidth: '5px', borderStyle: 'solid', borderColor: '#555555' }} src={product.image} alt={product.product_name} />
         <p>{product.description}</p>
-        <p>{product.price}</p>
-        <p>{product.category}</p>
-        <p>{product.brand}</p>
-        <p>{product.sku}</p>
+        <p className='product-details__p--price'><b>$</b>{product.price}</p>
+        <p className='product-details__p--category'><b>Category: </b>{product.category}</p>
+        <p className='product-details__p--brand'><b>Brand: </b>{product.brand}</p>
+        <p className='product-details__p--sku'><b>Sku: </b>{product.sku}</p>
         <button className='product-details__btn-comprar'>Comprar</button>
       </div>
     </>

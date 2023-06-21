@@ -1,8 +1,23 @@
 .product-details {
     margin-top: 135px;
+    padding-left: 25px;
 
     &__btn-comprar {
-        background-color: blue;
+        background-color: #f788ad;
         border-radius: 12px;
+        border-color: #555555;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    &__p{
+        &--price {
+            font-size: xx-large;
+        }
+        &--sku {
+            font-size: small;
+            color: #555555;
+        }
+        &--name {
+            font-family:'Times New Roman', Times, serif;
+        }
     }
 }
