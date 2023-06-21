@@ -12,10 +12,11 @@ const Header = ({ searchProduct, handleSearch }) => {
   return (
     <nav className='header'>
       <NavLink to='/' className='header__logo'>JayShop</NavLink>
-      <form>
+      <form onSubmit={(event) => { event.preventDefault() }}>
         <input
+          className='header__searchBar'
           type='text'
-          placeholder='What are you looking for?'
+          placeholder='What are you looking for?  '
           id='search'
           value={searchProduct}
           onChange={handleSearch}

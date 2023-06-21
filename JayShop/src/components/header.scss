@@ -25,6 +25,7 @@ $menu-color: #f788ad;
     &__logo {
         @include header-link;
         font-size: 3rem;
+        padding-bottom: 25px;
     }
 
     &__nav-list {
@@ -45,4 +46,26 @@ $menu-color: #f788ad;
             @include header-border;
         }
     }
+
+    &__searchBar {
+        border-radius: 50px;
+        background: #666666;
+        border: 2px solid $menu-color;
+        width: 350px;
+        margin: 25px 0px 0px 25px;
+
+        &::placeholder {
+            color: $menu-color;
+            opacity: 1; /* Firefox */
+        }
+
+        &::-ms-input-placeholder { /* Microsoft Edge */
+            color: $menu-color;
+          }
+
+        &:focus {
+            color: $menu-color;
+        }
+    }
 }
+
