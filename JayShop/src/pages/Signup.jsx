@@ -27,7 +27,7 @@ const Signup = () => {
   return (
     <main className='form-signin w-100' style={{ marginTop: '135px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>
       <form onSubmit={handleSubmit}>
-        <p style={{ fontSize: '50px', color: '#f788ad' }}><b>J</b>s</p>
+        <p style={{ fontSize: '50px', color: '#f788ad' }}><b>J</b><i>s</i></p>
         <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
 
         <div className='form-floating'>

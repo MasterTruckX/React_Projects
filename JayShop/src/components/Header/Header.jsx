@@ -11,7 +11,7 @@ const Header = ({ searchProduct, handleSearch }) => {
 
   return (
     <nav className='header'>
-      <NavLink to='/' className='header__logo'>JayShop</NavLink>
+      <NavLink to='/' className='header__logo'><b>Jay</b><i>Shop</i></NavLink>
       <form onSubmit={(event) => { event.preventDefault() }}>
         <input
           className='header__searchBar'
