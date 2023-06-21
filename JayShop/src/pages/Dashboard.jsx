@@ -19,19 +19,21 @@ const Dashboard = () => {
   }, [userPayload.id])
   return (
     <>
-      <h1>Dashboard</h1>
-      {
+      <div style={{ marginTop: '135px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>
+        <h1>Dashboard</h1>
+        {
         userData?.first_name && <p>First Name: {userData.first_name}</p>
       }
-      {
+        {
         userData?.last_name && <p>Last Name: {userData.last_name}</p>
       }
-      {
+        {
         userData?.gender && <p>Gender: {userData.gender}</p>
       }
-      {
+        {
         userData?.email && <p>Email: {userData.email}</p>
       }
+      </div>
     </>
   )
 }
