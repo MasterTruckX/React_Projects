@@ -1,3 +1,4 @@
+import { useAuthContext } from '@/hooks/useAuth'
 import { NavLink } from 'react-router-dom'
 import './header.scss'
 // import logo from '@/assets/JayShop.jpg'
@@ -5,6 +6,7 @@ import './header.scss'
 // NavLink es un tipo especial de Link, que me permite gestionar estilos en función de la ruta activa (isActive)
 
 const Header = ({ searchProduct, handleSearch }) => {
+  const { isAuth, logout } = useAuthContext()
   const linkIsActive = (isActive) => {
     return isActive ? 'header__item-link header__item-link--is-active' : 'header__item-link'
   }
@@ -38,21 +40,46 @@ const Header = ({ searchProduct, handleSearch }) => {
           >Dashboard
           </NavLink>
         </li>
-        <li className='header__list-item'>
-          <NavLink
-            to='/login'
-            className={({ isActive }) => linkIsActive(isActive)}
-          >Login
-          </NavLink>
-        </li>
+        {isAuth
+          ? (
+            <>
+              <li className='header__list-item'>
+                <NavLink
+                  to='/secret'
+                  className={({ isActive }) => linkIsActive(isActive)}
+                >Secret
+                </NavLink>
+              </li>
 
-        <li className='header__list-item'>
-          <NavLink
-            to='/signup'
-            className={({ isActive }) => linkIsActive(isActive)}
-          >Signup
-          </NavLink>
-        </li>
+              <li className='header__list-item'>
+                <NavLink
+                  to='/'
+                  className='header__item-link'
+                  onClick={logout}
+                >Logout
+                </NavLink>
+              </li>
+            </>
+            )
+          : (
+            <>
+              <li className='header__list-item'>
+                <NavLink
+                  to='/login'
+                  className={({ isActive }) => linkIsActive(isActive)}
+                >Login
+                </NavLink>
+              </li>
+
+              <li className='header__list-item'>
+                <NavLink
+                  to='/signup'
+                  className={({ isActive }) => linkIsActive(isActive)}
+                >Signup
+                </NavLink>
+              </li>
+            </>
+            )}
       </ul>
     </nav>
   )
