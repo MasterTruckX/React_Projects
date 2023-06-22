@@ -1,7 +1,6 @@
 import { useAuthContext } from '@/hooks/useAuth'
 import { NavLink } from 'react-router-dom'
 import './header.scss'
-import LoginPopup from './LoginPopup/LoginPopup'
 // import logo from '@/assets/JayShop.jpg'
 // Documentación de NavLink:  https://reactrouter.com/en/main/components/nav-link
 // NavLink es un tipo especial de Link, que me permite gestionar estilos en función de la ruta activa (isActive)
@@ -14,7 +13,6 @@ const Header = ({ searchProduct, handleSearch }) => {
 
   return (
     <nav className='header'>
-      <LoginPopup />
       <NavLink to='/' className='header__logo'><b>Jay</b><i>Shop</i></NavLink>
       <form onSubmit={(event) => { event.preventDefault() }}>
         <input
@@ -80,6 +78,8 @@ const Header = ({ searchProduct, handleSearch }) => {
                 >Signup
                 </NavLink>
               </li>
+              <div style={{ color: '#555555' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>Login to your account or Sigup for a new account
+              </div>
             </>
             )}
       </ul>
