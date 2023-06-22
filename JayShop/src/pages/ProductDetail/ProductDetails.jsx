@@ -23,7 +23,7 @@ const ProductDetails = () => {
   return (
     <>
       <div className='product-details'>
-        <h1 className='product-details__p--name'>{product.product_name}</h1>
+        <h1 className='product-details__p--name'><i>{product.product_name}</i></h1>
         <img className='card-img-top' style={{ maxHeight: '300px', maxWidth: '50%', display: 'block', marginLeft: 'auto', marginRight: 'auto', borderWidth: '5px', borderStyle: 'solid', borderColor: '#555555' }} src={product.image} alt={product.product_name} />
         <p>{product.description}</p>
         <p className='product-details__p--price'><b>$</b>{product.price}</p>

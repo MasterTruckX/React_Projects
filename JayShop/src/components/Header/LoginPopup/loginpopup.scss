@@ -1,9 +1,10 @@
 .popup {
     position: relative;
+    display: inline-block;
+    cursor: pointer;
     z-index: 1;
 }
-//     display: inline-block;
-//     cursor: pointer;
+
 
 //     &.popuptext {
 //         visibility: hidden;

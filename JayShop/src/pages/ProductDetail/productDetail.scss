@@ -1,4 +1,5 @@
 .product-details {
+    position: relative;
     margin-top: 135px;
     padding-left: 25px;
 
@@ -15,9 +16,6 @@
         &--sku {
             font-size: small;
             color: #555555;
-        }
-        &--name {
-            font-family:'Times New Roman', Times, serif;
-        }
+        }        
     }
 }

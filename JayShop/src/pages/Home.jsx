@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <>
       <div className='Home'>
-        <h1>Home</h1>
+        <h1><i>Home</i></h1>
         <Header searchProduct={searchProduct} handleSearch={handleSearch} />
         <div className='d-flex flex-row flex-wrap justify-content-center'>
           {/* Si itemsData no esta vacio, recorro el arreglo con Map y creo un Card de Bootstrap para cada elemento */}
