@@ -1,6 +1,8 @@
 import { useAuthContext } from '@/hooks/useAuth'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSearchContext } from '@/hooks/useSearch'
+import { getSingleUserService } from '@/services/userService'
+import { useState, useEffect } from 'react'
 import './header.scss'
 
 // import { useState, useEffect } from 'react'
@@ -12,25 +14,26 @@ import './header.scss'
 // const Header = ({ searchProduct, handleSearch }) => {
 const Header = () => {
   const { handleSearch, searchItem } = useSearchContext()
-  const { isAuth, logout } = useAuthContext()
+  const { isAuth, logout, userPayload } = useAuthContext()
   const navigate = useNavigate()
-  // const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState({})
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await getSingleUserService(userPayload.id)
+        if (response.status === 200) {
+          setUserData(response.data)
+        }
+      } catch (error) {
+        console.log('Ocurrio un error:', error.message)
+      }
+    }
+    fetchUserData()
+  }, [userPayload?.id])
+
   const linkIsActive = (isActive) => {
     return isActive ? 'header__item-link header__item-link--is-active' : 'header__item-link'
   }
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await getSingleUserService(userPayload.id)
-  //       if (response.status === 200) {
-  //         setUserData(response.data)
-  //       }
-  //     } catch (error) {
-  //       console.log('Ocurrio un error:', error.message)
-  //     }
-  //   }
-  //   fetchUserData()
-  // }, [userPayload.id])
 
   return (
     <nav className='header'>
@@ -54,67 +57,71 @@ const Header = () => {
           </button>
         </form>
       </div>
-      <div className='header__navList-container'>
-        <ul className='header__nav-list'>
-          <li className='header__list-item'>
-            <NavLink
-              to='/'
-              className={({ isActive }) => linkIsActive(isActive)}
-            >Home
-            </NavLink>
-          </li>
+      <div className='header__navlist-username-container'>
+
+        <div className='header__navList-container'>
+          <ul className='header__nav-list'>
+            <li className='header__list-item'>
+              <NavLink
+                to='/'
+                className={({ isActive }) => linkIsActive(isActive)}
+              >Home
+              </NavLink>
+            </li>
+            {isAuth
+              ? (
+                <>
+                  <li className='header__list-item'>
+                    <NavLink
+                      to='/dashboard'
+                      className={({ isActive }) => linkIsActive(isActive)}
+                    >Dashboard
+                    </NavLink>
+                  </li>
+                  <li className='header__list-item'>
+                    <NavLink
+                      to='/secret'
+                      className={({ isActive }) => linkIsActive(isActive)}
+                    >Secret
+                    </NavLink>
+                  </li>
+
+                  <li className='header__list-item'>
+                    <NavLink
+                      to='/'
+                      className='header__item-link'
+                      onClick={logout}
+                    >Logout
+                    </NavLink>
+                  </li>
+                </>
+                )
+              : (
+                <>
+                  <li className='header__list-item'>
+                    <NavLink
+                      to='/login'
+                      className={({ isActive }) => linkIsActive(isActive)}
+                    >Login
+                    </NavLink>
+                  </li>
+
+                  <li className='header__list-item'>
+                    <NavLink
+                      to='/signup'
+                      className={({ isActive }) => linkIsActive(isActive)}
+                    >Signup
+                    </NavLink>
+                  </li>
+                </>
+                )}
+          </ul>
+        </div>
+        <div className='header__userName-container'>
           {isAuth
-            ? (
-              <>
-                <li className='header__list-item'>
-                  <NavLink
-                    to='/dashboard'
-                    className={({ isActive }) => linkIsActive(isActive)}
-                  >Dashboard
-                  </NavLink>
-                </li>
-                <li className='header__list-item'>
-                  <NavLink
-                    to='/secret'
-                    className={({ isActive }) => linkIsActive(isActive)}
-                  >Secret
-                  </NavLink>
-                </li>
-
-                <li className='header__list-item'>
-                  <NavLink
-                    to='/'
-                    className='header__item-link'
-                    onClick={logout}
-                  >Logout
-                  </NavLink>
-                </li>
-                {/* <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>{userData?.first_name && <p>Welcome Back, {userData.first_name}</p>}</div> */}
-                <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'><p>Welcome Back, @User </p></div>
-              </>
-              )
-            : (
-              <>
-                <li className='header__list-item'>
-                  <NavLink
-                    to='/login'
-                    className={({ isActive }) => linkIsActive(isActive)}
-                  >Login
-                  </NavLink>
-                </li>
-
-                <li className='header__list-item'>
-                  <NavLink
-                    to='/signup'
-                    className={({ isActive }) => linkIsActive(isActive)}
-                  >Signup
-                  </NavLink>
-                </li>
-                <div style={{ color: '#555555' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>Login to your account or Sigup for a new account
-                </div>
-              </>
-              )}
-        </ul>
+            ? <p style={{ color: '#f788ad', textAlign: 'center' }}>Welcome Back! {userData.first_name}</p>
+            : <p style={{ color: '#666666' }}>Login to your account or Sigup for a new account</p>}
+        </div>
       </div>
     </nav>
   )
