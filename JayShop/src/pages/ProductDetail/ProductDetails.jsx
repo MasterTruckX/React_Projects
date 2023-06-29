@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSingleItem } from '@/services/itemServices'
+import { useAuthContext } from '@/hooks/useAuth'
+import { Tooltip } from '@mui/material'
 import './productDetail.scss'
 
 const ProductDetails = () => {
   const { id } = useParams()
   const [product, setProduct] = useState([])
+  const { isAuth } = useAuthContext()
   useEffect(() => {
     const fetchItemData = async () => {
       try {
@@ -30,7 +33,11 @@ const ProductDetails = () => {
         <p className='product-details__p--category'><b>Category: </b>{product.category}</p>
         <p className='product-details__p--brand'><b>Brand: </b>{product.brand}</p>
         <p className='product-details__p--sku'><b>Sku: </b>{product.sku}</p>
-        <button className='product-details__btn-comprar'>Comprar</button>
+        {
+          isAuth
+            ? <button type='button' className='product-details__btn-comprar'>Buy</button>
+            : <Tooltip title='Login or Signup to purchase' placement='right' arrow><button type='button' className='btn btn-secondary' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Login to purchase or Signup'>Buy</button></Tooltip>
+        }
       </div>
     </>
 
