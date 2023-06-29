@@ -1,13 +1,15 @@
 .product-details {
     position: relative;
     margin-top: 135px;
+    margin-bottom: 50px;
     padding-left: 25px;
 
     &__btn-comprar {
+        color: white;
         background-color: #f788ad;
-        border-radius: 12px;
-        border-color: #555555;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        border: none;
+        border-radius: 10px;
+        padding: 7px 12px 7px 12px;
     }
     &__p{
         &--price {

@@ -1,6 +1,17 @@
+// className='Home__buyBtn--tooltiptext'
+// Login to purchase or Signup
 .Home {
     position: relative;
     margin-top: 135px;
-    z-index: -1;
-    
+    z-index: 1;
+    &__buyBtn{
+        &--buyLink {
+            color: white;
+            background-color: #f788ad;
+            border: none;
+            border-radius: 10px;
+            padding: 7px 12px 7px 12px;
+        }
+        
+    }
 }

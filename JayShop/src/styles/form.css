@@ -4,7 +4,7 @@
   }
   
   .form-signin .form-floating:focus-within {
-    z-index: 2;
+    z-index: 3;
   }
   
   .form-signin input[type="email"] {

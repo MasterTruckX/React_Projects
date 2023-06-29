@@ -4,8 +4,11 @@ import '@/styles/home.scss'
 // import Header from '@/components/Header'
 import { Link } from 'react-router-dom'
 import { useSearchContext } from '@/hooks/useSearch'
+import { useAuthContext } from '@/hooks/useAuth'
+import { Tooltip } from '@mui/material'
 const Home = () => {
   const { loading, itemsData, searchItem } = useSearchContext()
+  const { isAuth } = useAuthContext()
   // const [itemsData, setItemsData] = useState([])
   // const [loading, setLoading] = useState(true)
   // const [searchProduct, setSearchProduct] = useState('') // Palabra a buscar
@@ -45,10 +48,15 @@ const Home = () => {
             <div className='card' style={{ width: '18rem' }} key={product.id}>
               <img className='card-img-top' style={{ maxHeight: '300px' }} src={product.image} alt={product.product_name} />
               <div className='card-body'>
-                <h5 className='card-title'><Link to={`/items/${product.id}`}>{product.product_name}</Link></h5>
-                <p className='card-text'>{product.description}</p>
+                <h5 className='card-title'><Link to={`/items/${product.id}`} style={{ color: '#000000' }}>{product.product_name}</Link></h5>
+                <p className='card-text' style={{ color: '#666666' }}>{product.description}</p>
                 {/* Aqui no se implementa el botón, pero basta con sustituir "a" por Link de react-router-dom y la ruta del enlace indicar el componente que mostrará la información de un solo producto, seguido del id del producto */}
-                <a href='#' style={{ color: '#f788ad' }}>Comprar</a>
+                {
+                  isAuth
+                    ? <button type='button' className='Home__buyBtn--buyLink'>Buy</button>
+                    : <Tooltip title='Login or Signup to purchase' placement='right' arrow><button type='button' className='btn btn-secondary' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Login to purchase or Signup'>Buy</button></Tooltip>
+                }
+
               </div>
             </div>
           ))

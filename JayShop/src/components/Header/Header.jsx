@@ -34,82 +34,88 @@ const Header = () => {
 
   return (
     <nav className='header'>
-      <NavLink to='/' className='header__logo'><b>Jay</b><i>Shop</i></NavLink>
-      <form onSubmit={(event) => { event.preventDefault() }}>
-        <input
-          className='header__searchBar'
-          type='text'
-          placeholder='What are you looking for?  '
-          id='search'
-          value={searchItem}
-          onChange={handleSearch}
-        />
-        <button
-          className='header__searchBtn'
-          onClick={() => navigate('/')}
-        >GO
-        </button>
-      </form>
-      <ul className='header__nav-list'>
-        <li className='header__list-item'>
-          <NavLink
-            to='/'
-            className={({ isActive }) => linkIsActive(isActive)}
-          >Home
-          </NavLink>
-        </li>
-        {isAuth
-          ? (
-            <>
-              <li className='header__list-item'>
-                <NavLink
-                  to='/dashboard'
-                  className={({ isActive }) => linkIsActive(isActive)}
-                >Dashboard
-                </NavLink>
-              </li>
-              <li className='header__list-item'>
-                <NavLink
-                  to='/secret'
-                  className={({ isActive }) => linkIsActive(isActive)}
-                >Secret
-                </NavLink>
-              </li>
+      <div className='header__logo-container'>
+        <NavLink to='/' className='header__logo'><b>Jay</b><i>Shop</i></NavLink>
+      </div>
+      <div className='header__form-container'>
+        <form onSubmit={(event) => { event.preventDefault() }}>
+          <input
+            className='header__searchBar'
+            type='text'
+            placeholder='What are you looking for?  '
+            id='search'
+            value={searchItem}
+            onChange={handleSearch}
+          />
+          <button
+            className='header__searchBtn'
+            onClick={() => navigate('/')}
+          >GO
+          </button>
+        </form>
+      </div>
+      <div className='header__navList-container'>
+        <ul className='header__nav-list'>
+          <li className='header__list-item'>
+            <NavLink
+              to='/'
+              className={({ isActive }) => linkIsActive(isActive)}
+            >Home
+            </NavLink>
+          </li>
+          {isAuth
+            ? (
+              <>
+                <li className='header__list-item'>
+                  <NavLink
+                    to='/dashboard'
+                    className={({ isActive }) => linkIsActive(isActive)}
+                  >Dashboard
+                  </NavLink>
+                </li>
+                <li className='header__list-item'>
+                  <NavLink
+                    to='/secret'
+                    className={({ isActive }) => linkIsActive(isActive)}
+                  >Secret
+                  </NavLink>
+                </li>
 
-              <li className='header__list-item'>
-                <NavLink
-                  to='/'
-                  className='header__item-link'
-                  onClick={logout}
-                >Logout
-                </NavLink>
-              </li>
-              {/* <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>{userData?.first_name && <p>Welcome Back, {userData.first_name}</p>}</div> */}
-              <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'><p>Welcome Back, @User </p></div>
-            </>
-            )
-          : (
-            <>
-              <li className='header__list-item'>
-                <NavLink
-                  to='/login'
-                  className={({ isActive }) => linkIsActive(isActive)}
-                >Login
-                </NavLink>
-              </li>
+                <li className='header__list-item'>
+                  <NavLink
+                    to='/'
+                    className='header__item-link'
+                    onClick={logout}
+                  >Logout
+                  </NavLink>
+                </li>
+                {/* <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>{userData?.first_name && <p>Welcome Back, {userData.first_name}</p>}</div> */}
+                <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'><p>Welcome Back, @User </p></div>
+              </>
+              )
+            : (
+              <>
+                <li className='header__list-item'>
+                  <NavLink
+                    to='/login'
+                    className={({ isActive }) => linkIsActive(isActive)}
+                  >Login
+                  </NavLink>
+                </li>
 
-              <li className='header__list-item'>
-                <NavLink
-                  to='/signup'
-                  className={({ isActive }) => linkIsActive(isActive)}
-                >Signup
-                </NavLink>
-              </li>
-              <div style={{ color: '#555555' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>Login to your account or Sigup for a new account
-              </div>
-            </>
-            )}
-      </ul>
+                <li className='header__list-item'>
+                  <NavLink
+                    to='/signup'
+                    className={({ isActive }) => linkIsActive(isActive)}
+                  >Signup
+                  </NavLink>
+                </li>
+                <div style={{ color: '#555555' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>Login to your account or Sigup for a new account
+                </div>
+              </>
+              )}
+        </ul>
+      </div>
     </nav>
   )
 }

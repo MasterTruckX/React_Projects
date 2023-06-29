@@ -20,12 +20,15 @@ $menu-counter-color: #666666;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
+    flex-wrap: wrap;
+    min-width: 500px;
 
     &__logo {
         @include header-link;
         font-size: 3rem;
         padding-bottom: 25px;
+        align-items: center;
     }
 
     &__nav-list {
