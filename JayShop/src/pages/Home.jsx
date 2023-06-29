@@ -1,40 +1,41 @@
-import { useState, useEffect } from 'react'
-import { getAllItems } from '@/services/itemServices'
-import '@/styles/home.css'
-import Header from '@/components/Header'
+// import { useState, useEffect } from 'react'
+// import { getAllItems } from '@/services/itemServices'
+import '@/styles/home.scss'
+// import Header from '@/components/Header'
 import { Link } from 'react-router-dom'
-
+import { useSearchContext } from '@/hooks/useSearch'
 const Home = () => {
-  const [itemsData, setItemsData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [searchProduct, setSearchProduct] = useState('') // Palabra a buscar
-  const handleSearch = (event) => {
-    setSearchProduct(event.target.value)
-  }
+  const { loading, itemsData, searchItem } = useSearchContext()
+  // const [itemsData, setItemsData] = useState([])
+  // const [loading, setLoading] = useState(true)
+  // const [searchProduct, setSearchProduct] = useState('') // Palabra a buscar
+  // const handleSearch = (event) => {
+  //   setSearchProduct(event.target.value)
+  // }
   const filteredProducts = itemsData.filter(product => {
-    return product.product_name.toLowerCase().includes(searchProduct.toLowerCase())
+    return product.product_name.toLowerCase().includes(searchItem.toLowerCase())
   })
 
-  useEffect(() => {
-    const fetchItemData = async () => {
-      try {
-        const response = await getAllItems()
-        if (response.status === 200) {
-          setItemsData(response.data)
-          setLoading(false)
-        }
-      } catch (error) {
-        console.log('Ocurrio un error:', error.message)
-      }
-    }
-    fetchItemData()
-  }, [])
+  // useEffect(() => {
+  //   const fetchItemData = async () => {
+  //     try {
+  //       const response = await getAllItems()
+  //       if (response.status === 200) {
+  //         setItemsData(response.data)
+  //         setLoading(false)
+  //       }
+  //     } catch (error) {
+  //       console.log('Ocurrio un error:', error.message)
+  //     }
+  //   }
+  //   fetchItemData()
+  // }, [])
 
   return (
     <>
       <div className='Home'>
         <h1><i>Home</i></h1>
-        <Header searchProduct={searchProduct} handleSearch={handleSearch} />
+        {/* <Header searchProduct={searchProduct} handleSearch={handleSearch} /> */}
         <div className='d-flex flex-row flex-wrap justify-content-center'>
           {/* Si itemsData no esta vacio, recorro el arreglo con Map y creo un Card de Bootstrap para cada elemento */}
           {
@@ -47,7 +48,7 @@ const Home = () => {
                 <h5 className='card-title'><Link to={`/items/${product.id}`}>{product.product_name}</Link></h5>
                 <p className='card-text'>{product.description}</p>
                 {/* Aqui no se implementa el botón, pero basta con sustituir "a" por Link de react-router-dom y la ruta del enlace indicar el componente que mostrará la información de un solo producto, seguido del id del producto */}
-                <a href='#' className='btn btn-primary'>Comprar</a>
+                <a href='#' style={{ color: '#f788ad' }}>Comprar</a>
               </div>
             </div>
           ))

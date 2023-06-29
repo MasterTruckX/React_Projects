@@ -1,5 +1,5 @@
 $menu-color: #f788ad;
-
+$menu-counter-color: #666666;
 @mixin header-link{
     color: $menu-color;
     text-decoration: none;
@@ -20,7 +20,7 @@ $menu-color: #f788ad;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
 
     &__logo {
         @include header-link;
@@ -49,10 +49,12 @@ $menu-color: #f788ad;
 
     &__searchBar {
         border-radius: 50px;
-        background: #666666;
+        background: $menu-counter-color;
         border: 2px solid $menu-color;
         width: 350px;
         margin: 25px 0px 0px 25px;
+        z-index: 3;
+        position: relative;
 
         &::placeholder {
             color: $menu-color;
@@ -66,6 +68,19 @@ $menu-color: #f788ad;
         &:focus {
             color: $menu-color;
         }
+    }
+
+    &__searchBtn {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border-radius: -25px;
+        background: $menu-color;
+        color: $menu-counter-color;
+        border: 2px solid $menu-color;
+        position: relative;
+        margin-left: -25px;
+        z-index: 2;
+        padding-left: 25px;
     }
 }
 

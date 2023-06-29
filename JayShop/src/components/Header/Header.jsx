@@ -1,15 +1,36 @@
 import { useAuthContext } from '@/hooks/useAuth'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useSearchContext } from '@/hooks/useSearch'
 import './header.scss'
+
+// import { useState, useEffect } from 'react'
+// import { getSingleUserService } from '@/services/userService'
 // import logo from '@/assets/JayShop.jpg'
 // Documentación de NavLink:  https://reactrouter.com/en/main/components/nav-link
 // NavLink es un tipo especial de Link, que me permite gestionar estilos en función de la ruta activa (isActive)
 
-const Header = ({ searchProduct, handleSearch }) => {
+// const Header = ({ searchProduct, handleSearch }) => {
+const Header = () => {
+  const { handleSearch, searchItem } = useSearchContext()
   const { isAuth, logout } = useAuthContext()
+  const navigate = useNavigate()
+  // const [userData, setUserData] = useState({})
   const linkIsActive = (isActive) => {
     return isActive ? 'header__item-link header__item-link--is-active' : 'header__item-link'
   }
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const response = await getSingleUserService(userPayload.id)
+  //       if (response.status === 200) {
+  //         setUserData(response.data)
+  //       }
+  //     } catch (error) {
+  //       console.log('Ocurrio un error:', error.message)
+  //     }
+  //   }
+  //   fetchUserData()
+  // }, [userPayload.id])
 
   return (
     <nav className='header'>
@@ -20,9 +41,14 @@ const Header = ({ searchProduct, handleSearch }) => {
           type='text'
           placeholder='What are you looking for?  '
           id='search'
-          value={searchProduct}
+          value={searchItem}
           onChange={handleSearch}
         />
+        <button
+          className='header__searchBtn'
+          onClick={() => navigate('/')}
+        >GO
+        </button>
       </form>
       <ul className='header__nav-list'>
         <li className='header__list-item'>
@@ -32,17 +58,16 @@ const Header = ({ searchProduct, handleSearch }) => {
           >Home
           </NavLink>
         </li>
-
-        <li className='header__list-item'>
-          <NavLink
-            to='/dashboard'
-            className={({ isActive }) => linkIsActive(isActive)}
-          >Dashboard
-          </NavLink>
-        </li>
         {isAuth
           ? (
             <>
+              <li className='header__list-item'>
+                <NavLink
+                  to='/dashboard'
+                  className={({ isActive }) => linkIsActive(isActive)}
+                >Dashboard
+                </NavLink>
+              </li>
               <li className='header__list-item'>
                 <NavLink
                   to='/secret'
@@ -59,6 +84,8 @@ const Header = ({ searchProduct, handleSearch }) => {
                 >Logout
                 </NavLink>
               </li>
+              {/* <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'>{userData?.first_name && <p>Welcome Back, {userData.first_name}</p>}</div> */}
+              <div style={{ color: '#f788ad' }} data-bs-container='body' data-bs-toggle='popover' data-bs-placement='bottom'><p>Welcome Back, @User </p></div>
             </>
             )
           : (
