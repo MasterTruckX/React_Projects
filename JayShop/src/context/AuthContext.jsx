@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
     setUserPayload(null)
     setIsAuth(false)
   }
+
   useEffect(() => {
     // recuperamos el token, si no existe devolvera null
     const token = localStorage.getItem('token')

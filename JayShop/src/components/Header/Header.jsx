@@ -11,7 +11,6 @@ import './header.scss'
 // Documentación de NavLink:  https://reactrouter.com/en/main/components/nav-link
 // NavLink es un tipo especial de Link, que me permite gestionar estilos en función de la ruta activa (isActive)
 
-// const Header = ({ searchProduct, handleSearch }) => {
 const Header = () => {
   const { handleSearch, searchItem } = useSearchContext()
   const { isAuth, logout, userPayload } = useAuthContext()
@@ -71,21 +70,24 @@ const Header = () => {
             {isAuth
               ? (
                 <>
-                  <li className='header__list-item'>
-                    <NavLink
-                      to='/dashboard'
-                      className={({ isActive }) => linkIsActive(isActive)}
-                    >Dashboard
-                    </NavLink>
-                  </li>
-                  <li className='header__list-item'>
-                    <NavLink
-                      to='/secret'
-                      className={({ isActive }) => linkIsActive(isActive)}
-                    >Secret
-                    </NavLink>
-                  </li>
-
+                  {userData.role === 'ADMIN'
+                    ? (
+                      <>
+                        <li className='header__list-item'>
+                          <NavLink to='/dashboard' className={({ isActive }) => linkIsActive(isActive)}>Dashboard</NavLink>
+                        </li>
+                        <li className='header__list-item'>
+                          <NavLink to='/secret' className={({ isActive }) => linkIsActive(isActive)}>Secret</NavLink>
+                        </li>
+                      </>
+                      )
+                    : (
+                      <>
+                        <li className='header__list-item'>
+                          <NavLink to='/dashboard' className={({ isActive }) => linkIsActive(isActive)}>Dashboard</NavLink>
+                        </li>
+                      </>
+                      )}
                   <li className='header__list-item'>
                     <NavLink
                       to='/'
