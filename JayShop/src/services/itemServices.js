@@ -16,8 +16,9 @@ axios.interceptors.request.use((config) => {
 
 const getSingleItem = (id) => axios.get(`${BASE_URL}/items/${id}`)
 const getAllItems = () => axios.get(`${BASE_URL}/items`)
-
+const registerNewItem = (data) => axios.post(`${BASE_URL}/items`, data)
 export {
   getSingleItem,
-  getAllItems
+  getAllItems,
+  registerNewItem
 }

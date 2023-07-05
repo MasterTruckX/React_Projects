@@ -6,12 +6,10 @@
 // 4. No debe ser llamado dentro de un loop, condicional o función anidada.
 // 5. Deben ser reutilizables, NO para casos muy específicos.
 
-import { useState } from 'react'
-
+import { useState } from 'react' 
 function useForm (callback, defaults) {
   // Estado único para guardar todos los valores del formulario en un objeto
   const [input, setInput] = useState({ defaults })
-
   // Función que se ejecuta al enviar un formulario
   const handleSubmit = (event) => {
     event.preventDefault() // Evita que se recargue la página y rompa el SPA
